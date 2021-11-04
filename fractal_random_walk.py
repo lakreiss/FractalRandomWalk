@@ -56,14 +56,14 @@ root = tk.Tk()
 root.title(string="Fractal Random Walk")
 
 canvas = tk.Canvas(root, width=WIDTH, height=HEIGHT)
-canvas.grid(row=1, sticky=(tk.N, tk.W, tk.E, tk.S), columnspan=(len(variables) * 2))
+canvas.grid(column=2, rowspan=4 * len(variables), sticky=(tk.NSEW))
 
 for i, variable in enumerate(variables):
-    tk.Label(root, text=variable["text"]).grid(column=(2 * i), row=0, columnspan=1)
-    variable_entry = tk.Entry(root, width=int(WIDTH / (32 * len(variables))))
+    tk.Label(root, text=variable["text"]).grid(column=0, row=i)
+    variable_entry = tk.Entry(root, width=int(WIDTH/100))
     variable_input = tk.StringVar(value=variable["value"])
     variable_entry["textvariable"] = variable_input
-    variable_entry.grid(column=(1 + (2 * i)), row=0, columnspan=1)
+    variable_entry.grid(column=1, row=i)
     variable_entry.bind('<Key-Return>', createShape)
     variable["stringvar"] = variable_input
 
